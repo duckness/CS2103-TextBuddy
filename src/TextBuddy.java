@@ -5,7 +5,7 @@
  * Author: Bjorn Lim
  * Matric: A0116538A
  * Code Language: Java
- * Tutorial ID: 
+ * Tutorial ID: T09
  * Description: This program adds and removes lines from a specified file
  * 
  ***********************************************************************/
@@ -19,52 +19,11 @@ public class TextBuddy {
 
 	public static void main (String[] args){
 
-		// check if the inputs are valid, exit with an error if invalid
-		catchErrors(args);
-
 		txtFile inputFile = new txtFile (args[0]);
 		System.out.println("Welcome to TextBuddy. " + inputFile.getName() + " is ready for use");
 
 		// now, we can process the inputs by the user
 		commands(inputFile);
-	}
-
-	// catch errors and tell the user what is wrong if any
-	public static void catchErrors (String[] args){
-
-		// check if a file has been specified as input
-		if (args.length == 0){
-			System.out.println("Please specify a file as input.");
-			System.exit(1);
-		}
-
-		File inputFile = new File(args[0]);
-
-		// check if the file exists
-		if (!inputFile.exists()){
-			System.out.println("Unable to find the specified file.");
-			System.out.println("Would you like to create a new file with the name: " + args[0] +"?");
-			System.out.println("[Y/N]");
-			processAnswer(inputFile.toPath());
-		}
-
-		// check if the input is actually a file
-		if (inputFile.isDirectory()){
-			System.out.println("You have specified a directory, please specify a file.");
-			System.exit(3);
-		}
-
-		// check for read permissions
-		if (!inputFile.canRead()){
-			System.out.println("You don't have read permissions to the file.");
-			System.exit(4);
-		}
-
-		//check for write permissions
-		if (!inputFile.canWrite()){
-			System.out.println("You don't have write permissions to the file.");
-			System.exit(5);
-		}
 	}
 
 	// process the user's inputs
@@ -112,51 +71,7 @@ public class TextBuddy {
 				System.exit(0);
 				break;
 
-			// tell the user what are the valid inputs
-			case "help":
-				System.out.printf("List of Commands:\n"
-						+ "display - show the lines in the file\n"
-						+ "add <phrase> - adds a line\n"
-						+ "delete <number> - removes the line signified by the number\n"
-						+ "clear - removes ALL lines\n"
-						+ "help - displays this screen\n"
-						+ "exit - saves the file and exits\n");
-				break;
-
 			// tell the user to input a valid command
-			default:
-				System.out.println("please input a valid command, for a list of valid commands, type: \"help\"");
-				break;
-			}
-		}
-	}
-
-	// case where file doesn't exist, asking if user wants to create it
-	public static void processAnswer (Path path){
-		
-		Scanner sc = new Scanner(System.in);
-		
-		outerLoop:
-		while (true){
-			switch (sc.next().toUpperCase()){
-			
-			case "Y":
-				try {
-					Files.createFile(path);
-					break outerLoop;
-				} 
-				catch (IOException e){
-					System.out.println("Unable to write file.");
-					sc.close();
-					System.exit(5);
-				}
-				break;
-				
-			case "N":
-				sc.close();
-				System.exit(2);
-				break;
-				
 			default:
 				System.out.println("please input a valid command");
 				break;
@@ -191,7 +106,7 @@ class txtFile {
 		catch (IOException e){
 			System.out.println("Unable to open the file specified.");
 			// e.printStackTrace(); //for testing
-			System.exit(6);
+			System.exit(1);
 		}
 	}
 
