@@ -1,7 +1,7 @@
 /**********************************************************************
  * 
  * CS2103T (AY2014/15 Sem1)
- * CE1 - TextBuddy
+ * CE2 - TextBuddy++
  * Author: Bjorn Lim
  * Matric: A0116538A
  * Code Language: Java
