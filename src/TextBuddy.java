@@ -15,6 +15,10 @@ import java.nio.charset.*;
 import java.nio.file.*;
 import java.util.*;
 
+// external library to output colored text
+import org.fusesource.jansi.AnsiConsole;
+import static org.fusesource.jansi.Ansi.*;
+
 public class TextBuddy {
 
 	public static void main (String[] args){
@@ -31,7 +35,7 @@ public class TextBuddy {
 		boolean reverse = false;
 
 		while (true){
-			System.out.printf("command: ");
+			System.out.print("command: ");
 			String cmd = sc.next().toLowerCase();
 
 			switch (cmd){
@@ -43,7 +47,7 @@ public class TextBuddy {
 
 			// add a line
 			case "add":
-				String newLine = sc.nextLine().substring(1); // to strip the leading whitespace
+				String newLine = readPhrase(sc);
 				System.out.println("added to " + inputFile.getName() + ": \"" + newLine + "\"");
 				inputFile.add(newLine);
 				inputFile.save();
@@ -82,6 +86,13 @@ public class TextBuddy {
 				}
 				inputFile.save();
 				break;
+				
+			// look for a phrase in the file
+			case "search":
+				String searchPhrase = readPhrase(sc);
+				System.out.println("all instances of " + searchPhrase + "will be highlighted in red");
+				inputFile.search(searchPhrase);
+				break;
 
 			// exit the program
 			case "exit":
@@ -95,6 +106,11 @@ public class TextBuddy {
 				break;
 			}
 		}
+	}
+	
+	// removes leading character, in our case, the leading whitespace
+	public static String readPhrase (Scanner sc){
+		return sc.nextLine().substring(1);
 	}
 }
 
@@ -163,10 +179,28 @@ class txtFile {
 		Collections.reverse(lines);
 	}
 	
+	
 	// Other //
 
+	// colors all the text the function searches for, then prints
+	public void search (String phrase){
+		
+		AnsiConsole.systemInstall();
+		
+		String phraseColored = color(phrase);
+		String str = this.toString().replaceAll(phrase, phraseColored);
+		System.out.print(ansi().render(str));
+		
+		AnsiConsole.systemUninstall();
+	}
+	
+	// color the phrase
+	private String color(String phrase){
+		return "@|red " + phrase + "|@";
+	}
+
 	public void display (){
-		System.out.printf(this.toString());
+		System.out.print(this.toString());
 	}
 
 	@Override
