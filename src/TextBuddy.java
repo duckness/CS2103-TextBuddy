@@ -57,6 +57,7 @@ public class TextBuddy {
 			// remove a line
 			case "delete":
 				int lineNum = sc.nextInt();
+				// make sure that the line number exists!
 				if (lineNum <= inputFile.size()){
 					System.out.println("deleted from " + inputFile.getName() + ": \"" + inputFile.getLine(lineNum) + "\"");
 					inputFile.delete(lineNum);
