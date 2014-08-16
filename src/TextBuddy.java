@@ -6,7 +6,7 @@
  * Matric: A0116538A
  * Code Language: Java
  * Tutorial ID: T09
- * Description: This program adds and removes lines from a specified file
+ * Description: This program performs operations on text in a file
  * 
  ***********************************************************************/
 
