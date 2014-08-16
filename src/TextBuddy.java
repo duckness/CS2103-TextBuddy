@@ -28,6 +28,7 @@ public class TextBuddy {
 	public static void commands (txtFile inputFile){
 		
 		Scanner sc = new Scanner(System.in);
+		boolean reverse = false;
 
 		while (true){
 			System.out.printf("command: ");
@@ -46,6 +47,7 @@ public class TextBuddy {
 				System.out.println("added to " + inputFile.getName() + ": \"" + newLine + "\"");
 				inputFile.add(newLine);
 				inputFile.save();
+				reverse = false;
 				break;
 
 			// remove a line
@@ -54,12 +56,30 @@ public class TextBuddy {
 				System.out.println("deleted from " + inputFile.getName() + ": \"" + inputFile.getLine(lineNum) + "\"");
 				inputFile.delete(lineNum);
 				inputFile.save();
+				reverse = false;
 				break;
 
 			// remove ALL lines
 			case "clear":
 				System.out.println("all content deleted from " + inputFile.getName());
 				inputFile.clear();
+				inputFile.save();
+				reverse = false;
+				break;
+				
+			// sort the lines in the file
+			case "sort":
+				System.out.println("all lines sorted alphabetically in" + inputFile.getName());
+				// boolean reverse is true only when the list is already sorted from running the
+				// sort command; hence, "sort" will reverse the list if the user tries to sort again.
+				if (reverse){
+					inputFile.reverse();
+					reverse = false;
+				}
+				else {
+					inputFile.sort();
+					reverse = true;
+				}
 				inputFile.save();
 				break;
 
@@ -135,6 +155,14 @@ class txtFile {
 		}
 	}
 
+	public void sort (){
+		Collections.sort(lines);
+	}
+	
+	public void reverse (){
+		Collections.reverse(lines);
+	}
+	
 	// Other //
 
 	public void display (){
