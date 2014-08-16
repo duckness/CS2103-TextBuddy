@@ -21,21 +21,19 @@ public class TextBuddy {
 
 		txtFile inputFile = new txtFile (args[0]);
 		System.out.println("Welcome to TextBuddy. " + inputFile.getName() + " is ready for use");
-
-		// now, we can process the inputs by the user
 		commands(inputFile);
 	}
 
 	// process the user's inputs
 	public static void commands (txtFile inputFile){
-
+		
 		Scanner sc = new Scanner(System.in);
 
 		while (true){
 			System.out.printf("command: ");
-			String str = sc.next();
+			String cmd = sc.next().toLowerCase();
 
-			switch (str.toLowerCase()){
+			switch (cmd){
 
 			// show the lines in the file
 			case "display":
@@ -65,7 +63,7 @@ public class TextBuddy {
 				inputFile.save();
 				break;
 
-			//exit the program
+			// exit the program
 			case "exit":
 				sc.close();
 				System.exit(0);
@@ -92,20 +90,12 @@ class txtFile {
 
 	public txtFile (String arg){
 		name = arg;
-		File file = new File(arg);
-		inputPath = file.toPath();
+		inputPath = new File(arg).toPath();
 		try {
 			lines = Files.readAllLines(inputPath,Charset.defaultCharset());
-			// for testing
-			/* 
-				for (String line : lines) {
-					System.out.println(line);
-				}
-			 */
 		}
 		catch (IOException e){
 			System.out.println("Unable to open the file specified.");
-			// e.printStackTrace(); //for testing
 			System.exit(1);
 		}
 	}
@@ -142,7 +132,6 @@ class txtFile {
 			System.out.println("Unable to write the file specified.");
 			System.out.println("You might want to save the following in order not to lose your work.");
 			display();
-			// e.printStackTrace(); //for testing
 		}
 	}
 
