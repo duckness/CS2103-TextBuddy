@@ -57,10 +57,15 @@ public class TextBuddy {
 			// remove a line
 			case "delete":
 				int lineNum = sc.nextInt();
-				System.out.println("deleted from " + inputFile.getName() + ": \"" + inputFile.getLine(lineNum) + "\"");
-				inputFile.delete(lineNum);
-				inputFile.save();
-				reverse = false;
+				if (lineNum <= inputFile.size()){
+					System.out.println("deleted from " + inputFile.getName() + ": \"" + inputFile.getLine(lineNum) + "\"");
+					inputFile.delete(lineNum);
+					inputFile.save();
+					reverse = false;
+				}
+				else {
+					System.out.println("line " + lineNum + " does not exist");
+				}
 				break;
 
 			// remove ALL lines
@@ -125,7 +130,7 @@ class txtFile {
 	// Constructors //
 
 	public txtFile (String arg){
-		name = arg;
+		name = fileName(arg);
 		inputPath = new File(arg).toPath();
 		try {
 			lines = Files.readAllLines(inputPath,Charset.defaultCharset());
@@ -152,6 +157,10 @@ class txtFile {
 		lines.add(str);
 	}
 
+	public int size (){
+		return lines.size();
+	}
+	
 	public void delete (int num){
 		lines.remove(num - 1);
 	}
@@ -182,6 +191,11 @@ class txtFile {
 	
 	// Other //
 
+	// removes the directory path in front of the filename if any
+	private String fileName (String arg){
+		return arg.substring(arg.lastIndexOf("/") + 1);
+	}
+	
 	// colors all the text the function searches for, then prints
 	public void search (String phrase){
 		
