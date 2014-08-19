@@ -96,7 +96,7 @@ public class TextBuddy {
 			// look for a phrase in the file
 			case "search":
 				String searchPhrase = readPhrase(sc);
-				System.out.println("all instances of " + searchPhrase + "will be highlighted in red");
+				System.out.println("all instances of \'" + searchPhrase + "\' will be highlighted in red");
 				inputFile.search(searchPhrase);
 				break;
 
