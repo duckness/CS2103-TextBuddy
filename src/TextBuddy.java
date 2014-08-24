@@ -1,238 +1,210 @@
-/**********************************************************************
- * 
- * CS2103T (AY2014/15 Sem1)
- * CE2 - TextBuddy++
- * Author: Bjorn Lim
- * Matric: A0116538A
- * Code Language: Java
- * Tutorial ID: T09
+/**
+ * CS2103T (AY2014/15 Sem1) 
+ * CE2 - TextBuddy++ 
+ * Author: Bjorn Lim 
+ * Matric: A0116538A 
+ * Tutorial ID: T09 
  * Description: This program performs operations on text in a file
- * 
- ***********************************************************************/
+ */
 
-import java.io.*;
-import java.nio.charset.*;
-import java.nio.file.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Scanner;
 
-// external library to output colored text
 import org.fusesource.jansi.AnsiConsole;
-import static org.fusesource.jansi.Ansi.*;
+import static org.fusesource.jansi.Ansi.ansi;
 
 public class TextBuddy {
 
-	public static void main (String[] args){
+    private static txtFile inputFile_;
 
-		txtFile inputFile = new txtFile (args[0]);
-		System.out.println("Welcome to TextBuddy. " + inputFile.getName() + " is ready for use");
-		commands(inputFile);
-	}
+    public static void main(String[] args) {
+        inputFile_ = processInput(args);
+        printMessage("welcome");
+        processCommands();
+    }
 
-	// process the user's inputs
-	public static void commands (txtFile inputFile){
-		
-		Scanner sc = new Scanner(System.in);
-		boolean reverse = false;
+    // check for IO errors before creating a txtFile
+    public static txtFile processInput(String[] args) {
+        checkForMissingArg(args);
+        checkForMissingFile(args);
+        return new txtFile(args[0]);
+    }
 
-		while (true){
-			System.out.print("command: ");
-			String cmd = sc.next().toLowerCase();
+    // ensure that the user provides arguments
+    public static void checkForMissingArg(String[] args) {
+        if (args.length == 0) {
+            printMessage("noFile");
+            System.exit(1);
+        }
+    }
 
-			switch (cmd){
+    // ensure that the file exists, otherwise ask if a new file is wanted
+    public static void checkForMissingFile(String[] args) {
+        File checkFile = new File(args[0]);
+        if (!checkFile.exists()) {
+            printMessage("noFile");
+            printMessage("newFile");
+            doesUserWantNewFile(checkFile);
+        }
+    }
 
-			// show the lines in the file
-			case "display":
-				inputFile.display();
-				break;
+    // ask if the user wants to make a new file as it does not exist
+    public static void doesUserWantNewFile(File newFile) {
+        Scanner sc = new Scanner(System.in);
 
-			// add a line
-			case "add":
-				String newLine = readPhrase(sc);
-				System.out.println("added to " + inputFile.getName() + ": \"" + newLine + "\"");
-				inputFile.add(newLine);
-				inputFile.save();
-				reverse = false;
-				break;
+        outerLoop: while (true) {
+            switch (sc.next().toUpperCase()) {
 
-			// remove a line
-			case "delete":
-				int lineNum = sc.nextInt();
-				// make sure that the line number exists!
-				if (lineNum <= inputFile.size()){
-					System.out.println("deleted from " + inputFile.getName() + ": \"" + inputFile.getLine(lineNum) + "\"");
-					inputFile.delete(lineNum);
-					inputFile.save();
-					reverse = false;
-				}
-				else {
-					System.out.println("line " + lineNum + " does not exist");
-				}
-				break;
+                case "Y" :
+                    sc.close();
+                    createFile(newFile);
+                    break outerLoop;
 
-			// remove ALL lines
-			case "clear":
-				System.out.println("all content deleted from " + inputFile.getName());
-				inputFile.clear();
-				inputFile.save();
-				reverse = false;
-				break;
-				
-			// sort the lines in the file
-			case "sort":
-				System.out.println("all lines sorted alphabetically in" + inputFile.getName());
-				// boolean reverse is true only when the list is already sorted from running the
-				// sort command; hence, "sort" will reverse the list if the user tries to sort again.
-				if (reverse){
-					inputFile.reverse();
-					reverse = false;
-				}
-				else {
-					inputFile.sort();
-					reverse = true;
-				}
-				inputFile.save();
-				break;
-				
-			// look for a phrase in the file
-			case "search":
-				String searchPhrase = readPhrase(sc);
-				System.out.println("all instances of \'" + searchPhrase + "\' will be highlighted in red");
-				inputFile.search(searchPhrase);
-				break;
+                case "N" :
+                    sc.close();
+                    System.exit(2);
+                    break;
 
-			// exit the program
-			case "exit":
-				sc.close();
-				System.exit(0);
-				break;
+                default :
+                    printMessage("invalidCommand");
+                    break;
+            }
+        }
+    }
 
-			// tell the user to input a valid command
-			default:
-				System.out.println("please input a valid command");
-				break;
-			}
-		}
-	}
-	
-	// removes leading character, in our case, the leading whitespace
-	public static String readPhrase (Scanner sc){
-		return sc.nextLine().substring(1);
-	}
-}
+    // try to create a new file if possible
+    public static void createFile(File newFile) {
+        try {
+            Files.createFile(newFile.toPath());
+        } catch (IOException e) {
+            printMessage("noAccess");
+            System.exit(3);
+        }
+    }
 
-class txtFile {
+    // print the messages in this class
+    public static void printMessage(String str) {
+        switch (str) {
+            case "noFile" :
+                System.out.println("File does not exist.");
+                break;
 
-	// Data Attributes //
+            case "newFile" :
+                System.out.print("Would you like to create a new file? [Y/N]");
+                break;
 
-	private Path inputPath;
-	private List<String> lines;
-	private String name;
+            case "invalidCommand" :
+                System.out.println("Please input a valid command.");
+                break;
 
-	// Constructors //
+            case "noAccess" :
+                System.out.println("Unable to access file.");
+                break;
 
-	public txtFile (String arg){
-		name = fileName(arg);
-		inputPath = new File(arg).toPath();
-		try {
-			lines = Files.readAllLines(inputPath,Charset.defaultCharset());
-		}
-		catch (IOException e){
-			System.out.println("Unable to open the file specified.");
-			System.exit(1);
-		}
-	}
+            case "welcome" :
+                System.out.println("Welcome to TextBuddy. \""
+                        + inputFile_.getName() + "\" is ready for use.");
+                break;
 
-	// Accessors //
+            case "command" :
+                System.out.print("Command: ");
+                break;
 
-	public String getName (){
-		return name;
-	}
+            case "display" :
+                System.out.println(inputFile_.toString());
+                break;
 
-	public String getLine (int num){
-		return lines.get(num - 1);
-	}
+            case "add" :
+                System.out.println("Added to \"" + inputFile_.getName()
+                        + "\": \"" + inputFile_.getLast() + "\".");
+                break;
 
-	// Mutators //
+            case "delete" :
+                System.out.println("Deleted from \"" + inputFile_.getName()
+                        + "\": \"" + inputFile_.getLastDeleted() + "\".");
+                break;
 
-	public void add (String str){
-		lines.add(str);
-	}
+            case "clear" :
+                System.out.println("All content deleted from \""
+                        + inputFile_.getName() + "\".");
+                break;
 
-	public int size (){
-		return lines.size();
-	}
-	
-	public void delete (int num){
-		lines.remove(num - 1);
-	}
+            case "sort" :
+                System.out.println("All lines sorted alphabetically in \""
+                        + inputFile_.getName() + "\".");
+                break;
 
-	public void clear (){
-		lines.clear();
-	}
+            case "search" :
+                AnsiConsole.systemInstall();
+                System.out.print(ansi().render(inputFile_.getSearchResults()));
+                AnsiConsole.systemUninstall();
+                break;
 
-	public void save (){
-		try {
-			Files.write(inputPath, lines);
-		}
-		catch (IOException e){
-			System.out.println("Unable to write the file specified.");
-			System.out.println("You might want to save the following in order not to lose your work.");
-			display();
-		}
-	}
+            default :
+                break;
 
-	public void sort (){
-		Collections.sort(lines);
-	}
-	
-	public void reverse (){
-		Collections.reverse(lines);
-	}
-	
-	
-	// Other //
+        }
+    }
 
-	// removes the directory path in front of the filename if any
-	private String fileName (String arg){
-		return arg.substring(arg.lastIndexOf("/") + 1);
-	}
-	
-	// colors all the text the function searches for, then prints
-	public void search (String phrase){
-		
-		AnsiConsole.systemInstall();
-		
-		String phraseColored = color(phrase);
-		String str = this.toString().replaceAll(phrase, phraseColored);
-		System.out.print(ansi().render(str));
-		
-		AnsiConsole.systemUninstall();
-	}
-	
-	// color the phrase
-	private String color(String phrase){
-		return "@|red " + phrase + "|@";
-	}
+    // process the user's inputs
+    public static void processCommands() {
+        Scanner sc = new Scanner(System.in);
 
-	public void display (){
-		System.out.print(this.toString());
-	}
+        while (true) {
+            printMessage("command");
+            String cmd = sc.next().toLowerCase();
 
-	@Override
-	public String toString() {
-		String str = "";
-		if (lines.size() == 0){
-			str += name;
-			str += " is empty\n";
-		}
-		else {
-			for (int i = 1; i < lines.size() + 1; i++){
-				str += i;
-				str += ". ";
-				str += lines.get(i - 1);
-				str += "\n";
-			}
-		}
-		return str;
-	}
+            switch (cmd) {
+
+                case "display" :
+                    printMessage("display");
+                    break;
+
+                case "add" :
+                    inputFile_.add(readPhrase(sc));
+                    printMessage("add");
+                    inputFile_.save();
+                    break;
+
+                case "delete" :
+                    inputFile_.delete(sc.nextInt());
+                    printMessage("delete");
+                    inputFile_.save();
+                    break;
+
+                case "clear" :
+                    inputFile_.clear();
+                    printMessage("clear");
+                    inputFile_.save();
+                    break;
+
+                case "sort" :
+                    inputFile_.sort();
+                    printMessage("sort");
+                    inputFile_.save();
+                    break;
+
+                case "search" :
+                    inputFile_.search(readPhrase(sc));
+                    printMessage("search");
+                    break;
+
+                case "exit" :
+                    sc.close();
+                    System.exit(0);
+                    break;
+
+                default :
+                    printMessage("invalidCommand");
+                    break;
+            }
+        }
+    }
+
+    // removes leading character, in our case, the leading whitespace
+    public static String readPhrase(Scanner sc) {
+        return sc.nextLine().substring(1);
+    }
 }
