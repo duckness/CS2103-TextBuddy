@@ -113,7 +113,7 @@ public class TextBuddy {
                 break;
 
             case "display" :
-                System.out.println(inputFile_.toString());
+                System.out.print(inputFile_.toString());
                 break;
 
             case "add" :
@@ -126,6 +126,10 @@ public class TextBuddy {
                         + "\": \"" + inputFile_.getLastDeleted() + "\".");
                 break;
 
+            case "noDelete" :
+                System.out.println("Please specify a line number that exists.");
+                break;
+                
             case "clear" :
                 System.out.println("All content deleted from \""
                         + inputFile_.getName() + "\".");
@@ -169,8 +173,7 @@ public class TextBuddy {
                     break;
 
                 case "delete" :
-                    inputFile_.delete(sc.nextInt());
-                    printMessage("delete");
+                    deleteLine(sc.nextInt());
                     inputFile_.save();
                     break;
 
@@ -206,5 +209,15 @@ public class TextBuddy {
     // removes leading character, in our case, the leading whitespace
     public static String readPhrase(Scanner sc) {
         return sc.nextLine().substring(1);
+    }
+    
+    // ensure that the line to be deleted exists
+    public static void deleteLine(int lineNum) {
+        if (inputFile_.size() <= lineNum) {
+            printMessage("noDelete");
+        } else {
+            inputFile_.delete(lineNum);
+            printMessage("delete");
+        }
     }
 }
