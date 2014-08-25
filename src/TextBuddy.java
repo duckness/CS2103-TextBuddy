@@ -1,9 +1,9 @@
 /**
  * =====NOTES==============
- * CS2103T (AY2014/15 Sem1) 
- * CE2 - TextBuddy++ 
+ * CS2103T (AY2014/15 Sem1)
+ * CE2 - TextBuddy++
  * A0116538A
- * Tutorial ID: T09 
+ * Tutorial ID: T09
  * ====/NOTES==============
  */
 
@@ -19,10 +19,10 @@ import org.fusesource.jansi.AnsiConsole;
 /**
  * TextBuddy is a program which manipulates text in a file. The file to be edited
  * is specified in the command line parameters, and will be created if asked for.
- * Adding, deleting, clearing, displaying, sorting, and searching is possible. 
+ * Adding, deleting, clearing, displaying, sorting, and searching is possible.
  * New entries will be added to the end of the file, which will be saved whenever
- * an input changes the contents of the file. 
- * 
+ * an input changes the contents of the file.
+ *
  * Example command format:
  *     c:> TextBuddy mytextfile.txt  (OR c:>java  TextBuddy mytextfile.txt)
  *     Welcome to TextBuddy. mytextfile.txt is ready for use
@@ -44,12 +44,12 @@ import org.fusesource.jansi.AnsiConsole;
  *     command: display
  *     mytextfile.txt is empty
  *     command: exit
- *     c:> 
- * 
+ *     c:>
+ *
  * @author Bjorn Lim
  */
 public class TextBuddy {
-    
+
     private static final String ADD_ = "Added to \"%1$s\": \"%2$s\".\n";
     private static final String BAD_ACCESS_ = "Unable to access file.\n";
     private static final String BAD_COMMAND_ = "Please input a valid command.\n";
@@ -66,14 +66,15 @@ public class TextBuddy {
     enum USER_COMMAND {
         DISPLAY, ADD, DELETE, CLEAR, SORT, SEARCH, EXIT
     }
-    
+
     // Possible user command types for Y/N questions
     enum YES_NO {
         Y, N
     }
+
     // The object that will be holding all of our information
     private static txtFile inputFile_;
-    
+
     // Declared outside for DRYness
     private static Scanner sc_ = new Scanner(System.in);
 
@@ -82,10 +83,10 @@ public class TextBuddy {
         printMessage(WELCOME_, inputFile_.getName());
         processCommands();
     }
-    
+
     /**
      * This method ensures that the user enters a valid input before making a txtFile
-     * 
+     *
      * @param args Is the user's input
      * @return Returns a txtFile if the user input is valid
      */
@@ -96,21 +97,21 @@ public class TextBuddy {
         checkForMissingFile(args);
         return new txtFile(args[0]);
     }
-    
+
     /**
      * This method prints strings plus some values to be inserted if needed
-     * 
+     *
      * @param str Is the string to be printed
      * @param args Are the additional values to be added if needed
      */
     private static void printMessage(String str, Object... args) {
         System.out.print(String.format(str, args));
     }
-    
+
     /**
-     * This method determines what command the user is performing and executes it 
+     * This method determines what command the user is performing and executes it
      */
-    public static void processCommands() {  
+    public static void processCommands() {
         while (true) {
             printMessage(COMMAND_);
             switch (USER_COMMAND.valueOf(readWord())) {
@@ -149,10 +150,10 @@ public class TextBuddy {
             }
         }
     }
-    
+
     /**
      * This method exits the program, throwing an error, if no file is found
-     * 
+     *
      * @param args Is the user's input
      */
 
@@ -162,11 +163,11 @@ public class TextBuddy {
             throw new Error(BAD_FILE_);
         }
     }
-    
+
     /**
      * This method checks if the user supplied filename matches a file in the
      * directory. If not, ask the user if he wants to make a new file with that name.
-     * 
+     *
      * @param args Is the user's input
      */
 
@@ -180,10 +181,10 @@ public class TextBuddy {
         }
     }
 
-    
+
     /**
      * This method asks if the user wants to make a new file
-     * 
+     *
      * @param newFile Is the file to be created
      */
     private static void doesUserWantNewFile(File newFile) {
@@ -206,9 +207,9 @@ public class TextBuddy {
     }
 
     /**
-     * This method creates a new file, throwing an error if the program 
+     * This method creates a new file, throwing an error if the program
      * is unable to do so.
-     * 
+     *
      * @param newFile Is the file to be created
      */
     // try to create a new file if possible
@@ -289,25 +290,25 @@ public class TextBuddy {
 
     /**
      * This method reads a word and changes it to uppercase
-     * 
+     *
      * @return Returns the input word in uppercase
      */
     private static String readWord() {
         return sc_.next().toUpperCase();
     }
-    
+
     /**
      * This method removes the leading character, in our case, the leading whitespace
-     *  
+     *
      * @return Returns the input line without leading whitespace
      */
     private static String readPhrase() {
         return sc_.nextLine().substring(1);
     }
-    
+
     /**
      * This method ensures that the line to be deleted exists
-     * 
+     *
      * @param lineNum Is the line number to be deleted
      */
     private static void deleteLine(int lineNum) {
