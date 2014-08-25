@@ -90,8 +90,6 @@ public class TextBuddy {
      * @param args Is the user's input
      * @return Returns a txtFile if the user input is valid
      */
-
-    // check for IO errors before creating a txtFile
     public static txtFile processInput(String[] args) {
         checkForMissingArg(args);
         checkForMissingFile(args);
