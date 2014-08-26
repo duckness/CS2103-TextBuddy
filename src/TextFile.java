@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 
-class txtFile {
+class TextFile {
 
 	// Data Attributes //
 
@@ -19,7 +19,7 @@ class txtFile {
 
 	// Constructors //
 
-	public txtFile(String arg) {
+	public TextFile(String arg) {
 		fileName_ = truncateDir(arg);
 		inputPath_ = new File(arg).toPath();
 		try {

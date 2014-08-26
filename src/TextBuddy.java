@@ -63,17 +63,17 @@ public class TextBuddy {
     private static final String WELCOME_ = "Welcome to TextBuddy. \"%1$s\" is ready for use.%n";
 
     // Possible user command types for the main program
-    enum USER_COMMAND {
+    enum UserCommand {
         DISPLAY, ADD, DELETE, CLEAR, SORT, SEARCH, EXIT
     }
 
     // Possible user command types for Y/N questions
-    enum YES_NO {
+    enum YesOrNo {
         Y, N
     }
 
     // The object that will be holding all of our information
-    private static txtFile inputFile_;
+    private static TextFile inputFile_;
 
     // Declared outside for DRYness
     private static Scanner sc_ = new Scanner(System.in);
@@ -90,10 +90,10 @@ public class TextBuddy {
      * @param args Is the user's input
      * @return Returns a txtFile if the user input is valid
      */
-    public static txtFile processInput(String[] args) {
+    public static TextFile processInput(String[] args) {
         checkForMissingArg(args);
         checkForMissingFile(args);
-        return new txtFile(args[0]);
+        return new TextFile(args[0]);
     }
 
     /**
@@ -112,7 +112,7 @@ public class TextBuddy {
     public static void processCommands() {
         while (true) {
             printMessage(COMMAND_);
-            switch (USER_COMMAND.valueOf(readWord())) {
+            switch (UserCommand.valueOf(readWord())) {
 
                 case DISPLAY :
                     commandDisplay();
@@ -183,7 +183,7 @@ public class TextBuddy {
      */
     private static void doesUserWantNewFile(File newFile) {
         outerLoop: while (true) {
-            switch (YES_NO.valueOf(readWord())) {
+            switch (YesOrNo.valueOf(readWord())) {
 
                 case Y :
                     createFile(newFile);
