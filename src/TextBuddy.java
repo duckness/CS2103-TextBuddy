@@ -154,8 +154,6 @@ public class TextBuddy {
      *
      * @param args Is the user's input
      */
-
-    // ensure that the user provides arguments
     private static void checkForMissingArg(String[] args) {
         if (args.length == 0) {
             throw new Error(BAD_FILE_);
@@ -168,8 +166,6 @@ public class TextBuddy {
      *
      * @param args Is the user's input
      */
-
-    // ensure that the file exists, otherwise ask if a new file is wanted
     private static void checkForMissingFile(String[] args) {
         File checkFile = new File(args[0]);
         if (!checkFile.exists()) {
@@ -210,7 +206,6 @@ public class TextBuddy {
      *
      * @param newFile Is the file to be created
      */
-    // try to create a new file if possible
     private static void createFile(File newFile) {
         try {
             Files.createFile(newFile.toPath());
