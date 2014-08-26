@@ -50,17 +50,17 @@ import org.fusesource.jansi.AnsiConsole;
  */
 public class TextBuddy {
 
-    private static final String ADD_ = "Added to \"%1$s\": \"%2$s\".\n";
-    private static final String BAD_ACCESS_ = "Unable to access file.\n";
-    private static final String BAD_COMMAND_ = "Please input a valid command.\n";
-    private static final String BAD_DELETE_ = "Please specify a line number that exists.\n";
-    private static final String BAD_FILE_ =  "File does not exist.\n";
-    private static final String CLEAR_ = "All content deleted from \"%1$s\".\n";
+    private static final String ADD_ = "Added to \"%1$s\": \"%2$s\".%n";
+    private static final String BAD_ACCESS_ = "Unable to access file.%n";
+    private static final String BAD_COMMAND_ = "Please input a valid command.%n";
+    private static final String BAD_DELETE_ = "Please specify a line number that exists.%n";
+    private static final String BAD_FILE_ =  "File does not exist.%n";
+    private static final String CLEAR_ = "All content deleted from \"%1$s\".%n";
     private static final String COMMAND_ = "Command: ";
-    private static final String DELETE_ = "Deleted from \"%1$s\": \"%2$s\".\n";
+    private static final String DELETE_ = "Deleted from \"%1$s\": \"%2$s\".%n";
     private static final String NEW_FILE_ = "Would you like to create a new file? [Y/N]: ";
-    private static final String SORT_ = "All lines sorted alphabetically in \"%1$s\".\n";
-    private static final String WELCOME_ = "Welcome to TextBuddy. \"%1$s\" is ready for use.\n";
+    private static final String SORT_ = "All lines sorted alphabetically in \"%1$s\".%n";
+    private static final String WELCOME_ = "Welcome to TextBuddy. \"%1$s\" is ready for use.%n";
 
     // Possible user command types for the main program
     enum USER_COMMAND {

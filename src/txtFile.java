@@ -42,11 +42,11 @@ class txtFile {
 	public String getLine(int num) {
 		return lines_.get(num - 1);
 	}
-	
+
 	public String getLast() {
 	    return lines_.get(lines_.size() - 1);
 	}
-	
+
 	public int size() {
 		return lines_.size();
 	}
@@ -54,7 +54,7 @@ class txtFile {
 	public String getLastDeleted() {
 	    return lastDeleted_;
 	}
-	
+
 	public String getSearchResults() {
 	    return searchResults_;
 	}
@@ -122,13 +122,13 @@ class txtFile {
 		if (lines_.size() == 0) {
 		    str += "\"";
 			str += fileName_;
-			str += "\" is empty.\n";
+			str += "\" is empty.%n";
 		} else {
 			for (int i = 1; i < lines_.size() + 1; i++) {
 				str += i;
 				str += ". ";
 				str += lines_.get(i - 1);
-				str += "\n";
+				str += "%n";
 			}
 		}
 		return str;
