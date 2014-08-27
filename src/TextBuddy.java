@@ -50,17 +50,21 @@ import org.fusesource.jansi.AnsiConsole;
  */
 public class TextBuddy {
 
-    private static final String ADD_ = "Added to \"%1$s\": \"%2$s\".%n";
-    private static final String BAD_ACCESS_ = "Unable to access file.%n";
-    private static final String BAD_COMMAND_ = "Please input a valid command.%n";
-    private static final String BAD_DELETE_ = "Please specify a line number that exists.%n";
-    private static final String BAD_FILE_ =  "File does not exist.%n";
-    private static final String CLEAR_ = "All content deleted from \"%1$s\".%n";
-    private static final String COMMAND_ = "Command: ";
-    private static final String DELETE_ = "Deleted from \"%1$s\": \"%2$s\".%n";
-    private static final String NEW_FILE_ = "Would you like to create a new file? [Y/N]: ";
-    private static final String SORT_ = "All lines sorted alphabetically in \"%1$s\".%n";
-    private static final String WELCOME_ = "Welcome to TextBuddy. \"%1$s\" is ready for use.%n";
+    private static final String PRINT_ADD = "Added to \"%1$s\": \"%2$s\".%n";
+    private static final String PRINT_BAD_ACCESS = "Unable to access file.%n";
+    private static final String PRINT_BAD_COMMAND = "Please input a valid command.%n";
+    private static final String PRINT_BAD_DELETE = "Please specify a line number "
+                                                    + "that exists.%n";
+    private static final String PRINT_BAD_FILE =  "File does not exist.%n";
+    private static final String PRINT_CLEAR = "All content deleted from \"%1$s\".%n";
+    private static final String PRINT_COMMAND = "Command: ";
+    private static final String PRINT_DELETE = "Deleted from \"%1$s\": \"%2$s\".%n";
+    private static final String PRINT_NEW_FILE = "Would you like to create a "
+                                                  + "new file? [Y/N]: ";
+    private static final String PRINT_SORT = "All lines sorted alphabetically "
+                                              + "in \"%1$s\".%n";
+    private static final String PRINT_WELCOME = "Welcome to TextBuddy. \"%1$s\" "
+                                                 + "is ready for use.%n";
 
     // Possible user command types for the main program
     enum UserCommand {
@@ -80,7 +84,7 @@ public class TextBuddy {
 
     public static void main(String[] args) {
         inputFile_ = processInput(args);
-        printMessage(WELCOME_, inputFile_.getName());
+        printMessage(PRINT_WELCOME, inputFile_.getName());
         processCommands();
     }
 
@@ -111,7 +115,7 @@ public class TextBuddy {
      */
     public static void processCommands() {
         while (true) {
-            printMessage(COMMAND_);
+            printMessage(PRINT_COMMAND);
             switch (UserCommand.valueOf(readWord())) {
 
                 case DISPLAY :
@@ -156,7 +160,7 @@ public class TextBuddy {
      */
     private static void checkForMissingArg(String[] args) {
         if (args.length == 0) {
-            throw new Error(BAD_FILE_);
+            throw new Error(PRINT_BAD_FILE);
         }
     }
 
@@ -169,8 +173,8 @@ public class TextBuddy {
     private static void checkForMissingFile(String[] args) {
         File checkFile = new File(args[0]);
         if (!checkFile.exists()) {
-            printMessage(BAD_FILE_);
-            printMessage(NEW_FILE_);
+            printMessage(PRINT_BAD_FILE);
+            printMessage(PRINT_NEW_FILE);
             doesUserWantNewFile(checkFile);
         }
     }
@@ -210,7 +214,7 @@ public class TextBuddy {
         try {
             Files.createFile(newFile.toPath());
         } catch (IOException e) {
-            throw new Error(BAD_ACCESS_);
+            throw new Error(PRINT_BAD_ACCESS);
         }
     }
 
@@ -219,7 +223,7 @@ public class TextBuddy {
      * This method deals with what to do when a user inputs an invalid command
      */
     private static void commandIsBad() {
-        printMessage(BAD_COMMAND_);
+        printMessage(PRINT_BAD_COMMAND);
     }
 
     /**
@@ -244,7 +248,7 @@ public class TextBuddy {
      */
     private static void commandSort() {
         inputFile_.sort();
-        printMessage(SORT_, inputFile_.getName());
+        printMessage(PRINT_SORT, inputFile_.getName());
         inputFile_.save();
     }
 
@@ -253,7 +257,7 @@ public class TextBuddy {
      */
     private static void commandClear() {
         inputFile_.clear();
-        printMessage(CLEAR_, inputFile_.getName());
+        printMessage(PRINT_CLEAR, inputFile_.getName());
         inputFile_.save();
     }
 
@@ -270,7 +274,7 @@ public class TextBuddy {
      */
     private static void commandAdd() {
         inputFile_.add(readPhrase());
-        printMessage(ADD_, inputFile_.getName(), inputFile_.getLast());
+        printMessage(PRINT_ADD, inputFile_.getName(), inputFile_.getLast());
         inputFile_.save();
     }
 
@@ -306,10 +310,10 @@ public class TextBuddy {
      */
     private static void deleteLine(int lineNum) {
         if (inputFile_.size() <= lineNum) {
-            printMessage(BAD_DELETE_);
+            printMessage(PRINT_BAD_DELETE);
         } else {
             inputFile_.delete(lineNum);
-            printMessage(DELETE_, inputFile_.getName(), inputFile_.getLastDeleted());
+            printMessage(PRINT_DELETE, inputFile_.getName(), inputFile_.getLastDeleted());
         }
     }
 }
