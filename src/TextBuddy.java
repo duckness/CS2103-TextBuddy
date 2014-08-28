@@ -51,20 +51,21 @@ import org.fusesource.jansi.AnsiConsole;
 public class TextBuddy {
 
     private static final String PRINT_ADD = "Added to \"%1$s\": \"%2$s\".%n";
-    private static final String PRINT_BAD_ACCESS = "Unable to access file.%n";
     private static final String PRINT_BAD_COMMAND = "Please input a valid command.%n";
     private static final String PRINT_BAD_DELETE = "Please specify a line number "
                                                     + "that exists.%n";
-    private static final String PRINT_BAD_FILE =  "File does not exist.%n";
     private static final String PRINT_CLEAR = "All content deleted from \"%1$s\".%n";
     private static final String PRINT_COMMAND = "Command: ";
     private static final String PRINT_DELETE = "Deleted from \"%1$s\": \"%2$s\".%n";
-    private static final String PRINT_NEW_FILE = "Would you like to create a "
-                                                  + "new file? [Y/N]: ";
+    private static final String PRINT_NEW_FILE = "File does not exist, would you "
+                                                  + "like to create a new file? [Y/N]: ";
     private static final String PRINT_SORT = "All lines sorted alphabetically "
                                               + "in \"%1$s\".%n";
     private static final String PRINT_WELCOME = "Welcome to TextBuddy. \"%1$s\" "
                                                  + "is ready for use.%n";
+
+    private static final String ERROR_BAD_ACCESS = "Unable to access file.";
+    private static final String ERROR_BAD_FILE =  "Please enter a file name.";
 
     // Possible user command types for the main program
     enum UserCommand {
@@ -100,6 +101,9 @@ public class TextBuddy {
     }
 
     /**
+     * The constant Strings have %n newline characters to facilitate all OSes and
+     * hence, need to be formatted properly before we print them
+     *
      * @param str Is the string to be printed
      * @param args Are the additional values to be added if needed
      */
@@ -154,7 +158,7 @@ public class TextBuddy {
      */
     private static void checkForMissingArg(String[] args) {
         if (args.length == 0) {
-            throw new Error(PRINT_BAD_FILE);
+            throw new Error(ERROR_BAD_FILE);
         }
     }
 
@@ -167,7 +171,6 @@ public class TextBuddy {
     private static void checkForMissingFile(String[] args) {
         File checkFile = new File(args[0]);
         if (!checkFile.exists()) {
-            printMessage(PRINT_BAD_FILE);
             printMessage(PRINT_NEW_FILE);
             doesUserWantNewFile(checkFile);
         }
@@ -206,7 +209,7 @@ public class TextBuddy {
         try {
             Files.createFile(newFile.toPath());
         } catch (IOException e) {
-            throw new Error(PRINT_BAD_ACCESS);
+            throw new Error(ERROR_BAD_ACCESS);
         }
     }
 
