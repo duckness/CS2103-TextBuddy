@@ -216,7 +216,6 @@ public class TextBuddy {
     }
 
     private static void commandExit() {
-        AnsiConsole.systemUninstall();
         System.exit(0);
     }
 
