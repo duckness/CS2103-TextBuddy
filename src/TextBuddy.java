@@ -15,12 +15,12 @@ import java.util.Scanner;
 /**
  * TextBuddy is a program which manipulates text in a file. The file to be edited
  * is specified in the command line parameters, and will be created if asked for.
- * Adding, deleting, clearing, are displaying possible. New entries will be added
+ * Adding, deleting, clearing, and displaying possible. New entries will be added
  * to the end of the file, which will be saved whenever an input changes the
  * contents of the file.
  *
  * Example command format:
- *     c:> TextBuddy mytextfile.txt  (OR c:>java  TextBuddy mytextfile.txt)
+ *     c:>java TextBuddy mytextfile.txt
  *     Welcome to TextBuddy. mytextfile.txt is ready for use
  *     command: add little brown fox
  *     added to mytextfile.txt: “little brown fox”
