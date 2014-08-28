@@ -24,7 +24,7 @@ import org.fusesource.jansi.AnsiConsole;
  * an input changes the contents of the file.
  *
  * Example command format:
- *     c:> TextBuddy mytextfile.txt  (OR c:>java  TextBuddy mytextfile.txt)
+ *     c:>java TextBuddy mytextfile.txt
  *     Welcome to TextBuddy. mytextfile.txt is ready for use
  *     command: add little brown fox
  *     added to mytextfile.txt: “little brown fox”
