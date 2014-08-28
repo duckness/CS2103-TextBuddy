@@ -79,7 +79,6 @@ public class TextBuddy {
     // The object that will be holding all of our information
     private static TextFile inputFile_;
 
-    // Declared outside for DRYness
     private static Scanner sc_ = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -89,7 +88,7 @@ public class TextBuddy {
     }
 
     /**
-     * This method ensures that the user enters a valid input before making a txtFile
+     * This method ensures that the user enters a valid input before making a TextFile
      *
      * @param args Is the user's input
      * @return Returns a txtFile if the user input is valid
@@ -101,8 +100,6 @@ public class TextBuddy {
     }
 
     /**
-     * This method prints strings plus some values to be inserted if needed
-     *
      * @param str Is the string to be printed
      * @param args Are the additional values to be added if needed
      */
@@ -110,9 +107,6 @@ public class TextBuddy {
         System.out.print(String.format(str, args));
     }
 
-    /**
-     * This method determines what command the user is performing and executes it
-     */
     public static void processCommands() {
         while (true) {
             printMessage(PRINT_COMMAND);
@@ -181,8 +175,6 @@ public class TextBuddy {
 
 
     /**
-     * This method asks if the user wants to make a new file
-     *
      * @param newFile Is the file to be created
      */
     private static void doesUserWantNewFile(File newFile) {
@@ -219,74 +211,50 @@ public class TextBuddy {
     }
 
 
-    /**
-     * This method deals with what to do when a user inputs an invalid command
-     */
     private static void commandIsBad() {
         printMessage(PRINT_BAD_COMMAND);
     }
 
-    /**
-     * This method exits the program
-     */
     private static void commandExit() {
         AnsiConsole.systemUninstall();
         System.exit(0);
     }
 
-    /**
-     * This method looks for a phrase in the txtFile
-     */
     private static void commandSearch() {
         AnsiConsole.systemInstall(); // needed to render text in colors
         inputFile_.search(readPhrase());
         printMessage(ansi().render(inputFile_.getSearchResults()).toString());
     }
 
-    /**
-     * This method sorts the lines in the txtFile
-     */
     private static void commandSort() {
         inputFile_.sort();
         printMessage(PRINT_SORT, inputFile_.getName());
         inputFile_.save();
     }
 
-    /**
-     * This method clears all the lines in the txtFile
-     */
     private static void commandClear() {
         inputFile_.clear();
         printMessage(PRINT_CLEAR, inputFile_.getName());
         inputFile_.save();
     }
 
-    /**
-     * This method deletes a line in the txtFile
-     */
     private static void commandDelete() {
         deleteLine(sc_.nextInt());
         inputFile_.save();
     }
 
-    /**
-     * This method adds a line in the txtFile
-     */
     private static void commandAdd() {
         inputFile_.add(readPhrase());
         printMessage(PRINT_ADD, inputFile_.getName(), inputFile_.getLast());
         inputFile_.save();
     }
 
-    /**
-     * This method prints all the lines in the txtFile
-     */
     private static void commandDisplay() {
         printMessage(inputFile_.toString());
     }
 
     /**
-     * This method reads a word and changes it to uppercase
+     * This method reads a word and changes it to uppercase so that it can be compared
      *
      * @return Returns the input word in uppercase
      */
