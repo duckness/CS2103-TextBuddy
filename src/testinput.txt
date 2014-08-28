@@ -1,0 +1,15 @@
+display
+add the quick brown fox
+add Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+add 你好
+display
+add (´･ω･`)
+add Ẕ̮̹͔̥͍A̺̘̘͓̕L̙̟̟͙ͅG̖̰̣͘O̷͈̭!̟̟͕ͅ
+display
+delete 3
+delete 5
+display
+delete 10
+clear
+display
+exit
