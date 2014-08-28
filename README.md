@@ -1,12 +1,10 @@
 #TextBuddy/TextBuddy++
 
-CS2103T (AY 2014/15 Sem1)
-CE1 - TextBuddy
-Bjorn Lim
-A0116538A
-Tutorial ID: T09
-
----
+CS2103T (AY 2014/15 Sem1)  
+CE1 - TextBuddy  
+Bjorn Lim  
+A0116538A  
+Tutorial ID: T09  
 
 ##Notes
 
@@ -57,5 +55,5 @@ all content deleted from mytextfile.txt
 command: display
 mytextfile.txt is empty
 command: exit
-c:>
+C:>
 ```
