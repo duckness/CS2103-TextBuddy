@@ -1,25 +1,25 @@
-Welcome to TextBuddy. "test.txt" is ready for use.
-Command: "test.txt" is empty.
-Command: Added to "test.txt": "the quick brown fox".
-Command: Added to "test.txt": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.".
-Command: Added to "test.txt": "你好".
+Welcome to TextBuddy. "mytestfile.txt" is ready for use.
+Command: "mytestfile.txt" is empty.
+Command: Added to "mytestfile.txt": "the quick brown fox".
+Command: Added to "mytestfile.txt": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.".
+Command: Added to "mytestfile.txt": "你好".
 Command: 1. the quick brown fox
 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 3. 你好
-Command: Added to "test.txt": "(´･ω･`)".
-Command: Added to "test.txt": "Ẕ̮̹͔̥͍A̺̘̘͓̕L̙̟̟͙ͅG̖̰̣͘O̷͈̭!̟̟͕ͅ".
+Command: Added to "mytestfile.txt": "(´･ω･`)".
+Command: Added to "mytestfile.txt": "Ẕ̮̹͔̥͍A̺̘̘͓̕L̙̟̟͙ͅG̖̰̣͘O̷͈̭!̟̟͕ͅ".
 Command: 1. the quick brown fox
 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 3. 你好
 4. (´･ω･`)
 5. Ẕ̮̹͔̥͍A̺̘̘͓̕L̙̟̟͙ͅG̖̰̣͘O̷͈̭!̟̟͕ͅ
-Command: Deleted from "test.txt": "你好".
+Command: Deleted from "mytestfile.txt": "你好".
 Command: Please specify a line number that exists.
 Command: 1. the quick brown fox
 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 3. (´･ω･`)
 4. Ẕ̮̹͔̥͍A̺̘̘͓̕L̙̟̟͙ͅG̖̰̣͘O̷͈̭!̟̟͕ͅ
 Command: Please specify a line number that exists.
-Command: All content deleted from "test.txt".
-Command: "test.txt" is empty.
+Command: All content deleted from "mytestfile.txt".
+Command: "mytestfile.txt" is empty.
 Command: 
