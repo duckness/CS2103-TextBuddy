@@ -1,27 +1,23 @@
 /**
  * =====NOTES==============
  * CS2103T (AY2014/15 Sem1)
- * CE2 - TextBuddy++
+ * CE1 - TextBuddy
  * A0116538A
  * Tutorial ID: T09
  * ====/NOTES==============
  */
-
-import static org.fusesource.jansi.Ansi.ansi;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 
-import org.fusesource.jansi.AnsiConsole;
-
 /**
  * TextBuddy is a program which manipulates text in a file. The file to be edited
  * is specified in the command line parameters, and will be created if asked for.
- * Adding, deleting, clearing, displaying, sorting, and searching is possible.
- * New entries will be added to the end of the file, which will be saved whenever
- * an input changes the contents of the file.
+ * Adding, deleting, clearing, are displaying possible. New entries will be added
+ * to the end of the file, which will be saved whenever an input changes the
+ * contents of the file.
  *
  * Example command format:
  *     c:> TextBuddy mytextfile.txt  (OR c:>java  TextBuddy mytextfile.txt)
@@ -59,8 +55,6 @@ public class TextBuddy {
     private static final String PRINT_DELETE = "Deleted from \"%1$s\": \"%2$s\".%n";
     private static final String PRINT_NEW_FILE = "File does not exist, would you "
                                                   + "like to create a new file? [Y/N]: ";
-    private static final String PRINT_SORT = "All lines sorted alphabetically "
-                                              + "in \"%1$s\".%n";
     private static final String PRINT_WELCOME = "Welcome to TextBuddy. \"%1$s\" "
                                                  + "is ready for use.%n";
 
@@ -69,7 +63,7 @@ public class TextBuddy {
 
     // Possible user command types for the main program
     enum UserCommand {
-        DISPLAY, ADD, DELETE, CLEAR, SORT, SEARCH, EXIT
+        DISPLAY, ADD, DELETE, CLEAR, EXIT
     }
 
     // Possible user command types for Y/N questions
@@ -130,14 +124,6 @@ public class TextBuddy {
 
                 case CLEAR :
                     commandClear();
-                    break;
-
-                case SORT :
-                    commandSort();
-                    break;
-
-                case SEARCH :
-                    commandSearch();
                     break;
 
                 case EXIT :
@@ -220,18 +206,6 @@ public class TextBuddy {
 
     private static void commandExit() {
         System.exit(0);
-    }
-
-    private static void commandSearch() {
-        AnsiConsole.systemInstall(); // needed to render text in colors
-        inputFile_.search(readPhrase());
-        printMessage(ansi().render(inputFile_.getSearchResults()).toString());
-    }
-
-    private static void commandSort() {
-        inputFile_.sort();
-        printMessage(PRINT_SORT, inputFile_.getName());
-        inputFile_.save();
     }
 
     private static void commandClear() {

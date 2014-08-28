@@ -1,7 +1,7 @@
 /**
  * =====NOTES==============
  * CS2103T (AY2014/15 Sem1)
- * CE2 - TextBuddy++
+ * CE1 - TextBuddy
  * A0116538A
  * Tutorial ID: T09
  * ====/NOTES==============
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,10 +30,6 @@ class TextFile {
 	private String fileName_;
 	// string of the last deleted line
 	private String lastDeleted_;
-	// string that holds the search results
-	private String searchResults_;
-	// boolean that checks if the file has already been sorted
-	private boolean isSorted_;
 
 	// Constructors //
 
@@ -45,9 +40,7 @@ class TextFile {
 		fileName_ = truncateDir(arg);
 		inputPath_ = new File(arg).toPath();
 		lines_ = readLines();
-		isSorted_ = false;
 		lastDeleted_ = "";
-		searchResults_ = "";
 	}
 
 	/**
@@ -104,13 +97,6 @@ class TextFile {
 	    return lastDeleted_;
 	}
 
-	/**
-	 * @return the search results
-	 */
-	public String getSearchResults() {
-	    return searchResults_;
-	}
-
 	// Mutators //
 
 	/**
@@ -118,7 +104,6 @@ class TextFile {
 	 */
 	public void add(String str) {
 		lines_.add(str);
-		isSorted_ = false;
 	}
 
 	/**
@@ -127,7 +112,6 @@ class TextFile {
 	public void delete(int num) {
 	    lastDeleted_ = lines_.get(num - 1);
 		lines_.remove(num - 1);
-		isSorted_ = false;
 	}
 
 	public void clear() {
@@ -148,19 +132,6 @@ class TextFile {
 		}
 	}
 
-	/**
-	 *  sort the lines, reverses the lines if the list is already sorted
-	 */
-	public void sort() {
-	    if (isSorted_){
-	        Collections.reverse(lines_);
-	        isSorted_ = false;
-	    } else {
-	        Collections.sort(lines_);
-	        isSorted_ = true;
-	    }
-	}
-
 	// Other //
 
 	/**
@@ -171,23 +142,6 @@ class TextFile {
 	 */
 	private String truncateDir(String arg) {
 		return arg.substring(arg.lastIndexOf("/") + 1);
-	}
-
-	/**
-	 *  colors all the text the function searches for
-	 * @param phrase is the phrase we are searching for
-	 */
-	public void search(String phrase) {
-		searchResults_ = this.toString().replaceAll(phrase, color(phrase));
-	}
-
-	/**
-	 *  color the phrase
-	 * @param phrase is the phrase we want to color
-	 * @return the phrase with the color tags
-	 */
-	private String color(String phrase) {
-		return "@|red " + phrase + "|@";
 	}
 
 	@Override
