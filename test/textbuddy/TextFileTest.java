@@ -20,10 +20,10 @@ public class TextFileTest {
                                                    "2. " + TEST_ADD_2 + "%n" +
                                                    "3. " + TEST_ADD_3 + "%n" +
                                                    "4. " + TEST_ADD_4 + "%n";
-    private static final String TEST_STRING_INIT_SORTED = "1. " + TEST_ADD_4 + "%n" +
-                                                          "2. " + TEST_ADD_2 + "%n" +
-                                                          "3. " + TEST_ADD_3 + "%n" +
-                                                          "4. " + TEST_ADD_1 + "%n";
+    private static final String TEST_STRING_SORTED_1 = "1. " + TEST_ADD_4 + "%n" +
+                                                       "2. " + TEST_ADD_2 + "%n" +
+                                                       "3. " + TEST_ADD_3 + "%n" +
+                                                       "4. " + TEST_ADD_1 + "%n";
 
 
 
@@ -69,7 +69,7 @@ public class TextFileTest {
         initTestFile(tester);
 
         tester.sort();
-        assertEquals("Strings from init must be sorted", TEST_STRING_INIT_SORTED,
+        assertEquals("Strings from init must be sorted", TEST_STRING_SORTED_1,
                      tester.toString());
     }
 

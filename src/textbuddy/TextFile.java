@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -121,7 +122,7 @@ class TextFile {
     }
 
     public void sort() {
-
+         Collections.sort(lines_, String.CASE_INSENSITIVE_ORDER);
     }
 
     /**
