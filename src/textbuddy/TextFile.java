@@ -120,6 +120,10 @@ class TextFile {
         lines_.clear();
     }
 
+    public void sort() {
+
+    }
+
     /**
      *  try to save the file, if it isn't possible, show what has been done
      */

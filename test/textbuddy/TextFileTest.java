@@ -9,13 +9,22 @@ public class TextFileTest {
     private static final String TEST_FILE = "mytestfile.txt";
     private static final String TEST_PATH = "src/" + TEST_FILE;
 
-    private static final String TEST_EMPTY = "\"" + TEST_FILE + "\" is empty.%n";
-    private static final String TEST_STRING_INIT = "1. The quick brown fox%n" +
-                                                   "2. jumps over the lazy dog.%n" +
-                                                   "3. Lorem ipsum%n" +
-                                                   "4. asdfghjkl%n";
+    private static final String TEST_ADD_1 = "The quick brown fox";
+    private static final String TEST_ADD_2 = "jumps over the lazy dog";
+    private static final String TEST_ADD_3 = "Lorem ipsum";
+    private static final String TEST_ADD_4 = "asdfghjkl";
+    private static final String TEST_ADD_5 = "shesellsseashellsbytheseashore";
 
-    private static final String TEST_ADD = "shesellsseashellsbytheseashore";
+    private static final String TEST_EMPTY = "\"" + TEST_FILE + "\" is empty.%n";
+    private static final String TEST_STRING_INIT = "1. " + TEST_ADD_1 + "%n" +
+                                                   "2. " + TEST_ADD_2 + "%n" +
+                                                   "3. " + TEST_ADD_3 + "%n" +
+                                                   "4. " + TEST_ADD_4 + "%n";
+    private static final String TEST_STRING_INIT_SORTED = "1. " + TEST_ADD_4 + "%n" +
+                                                          "2. " + TEST_ADD_2 + "%n" +
+                                                          "3. " + TEST_ADD_3 + "%n" +
+                                                          "4. " + TEST_ADD_1 + "%n";
+
 
 
     @Test
@@ -38,9 +47,9 @@ public class TextFileTest {
         TextFile tester = new TextFile(TEST_PATH);
         initTestFile(tester);
 
-        tester.add(TEST_ADD);
-        assertEquals("New string:" + TEST_ADD + "must be added correctly",
-                     TEST_STRING_INIT + "5. " + TEST_ADD + "%n",
+        tester.add(TEST_ADD_5);
+        assertEquals("New string:" + TEST_ADD_5 + "must be added correctly",
+                     TEST_STRING_INIT + "5. " + TEST_ADD_5 + "%n",
                      tester.toString());
     }
 
@@ -54,16 +63,26 @@ public class TextFileTest {
                      TEST_EMPTY, tester.toString());
     }
 
+    @Test
+    public void testSort() {
+        TextFile tester = new TextFile(TEST_PATH);
+        initTestFile(tester);
+
+        tester.sort();
+        assertEquals("Strings from init must be sorted", TEST_STRING_INIT_SORTED,
+                     tester.toString());
+    }
+
     private static void initTestFile(TextFile tester) {
         clearTestFile(tester);
         populateTestFile(tester);
     }
 
     private static void populateTestFile(TextFile tester) {
-        tester.add("The quick brown fox");
-        tester.add("jumps over the lazy dog.");
-        tester.add("Lorem ipsum");
-        tester.add("asdfghjkl");
+        tester.add(TEST_ADD_1);
+        tester.add(TEST_ADD_2);
+        tester.add(TEST_ADD_3);
+        tester.add(TEST_ADD_4);
     }
 
     private static void clearTestFile(TextFile tester) {
