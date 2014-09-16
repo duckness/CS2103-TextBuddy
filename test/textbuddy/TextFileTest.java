@@ -29,6 +29,12 @@ public class TextFileTest {
                                                      "3. " + TEST_ADD_2 + "%n" +
                                                      "4. " + TEST_ADD_3 + "%n" +
                                                      "5. " + TEST_ADD_1 + "%n";
+    private static final String TEST_LIST_SORTED_3 = "1. " + TEST_ADD_4 + "%n" +
+                                                     "2. " + TEST_ADD_2 + "%n" +
+                                                     "3. " + TEST_ADD_2 + "%n" +
+                                                     "4. " + TEST_ADD_3 + "%n" +
+                                                     "5. " + TEST_ADD_5 + "%n" +
+                                                     "6. " + TEST_ADD_1 + "%n";
 
     @Test
     public void testToString() {
@@ -79,6 +85,11 @@ public class TextFileTest {
         tester.sort();
         assertEquals("List must be sorted to correct order after adding similar string",
                      TEST_LIST_SORTED_2, tester.toString());
+
+        tester.add(TEST_ADD_5);
+        tester.sort();
+        assertEquals("List must be sorted to correct order after adding non-similar string",
+                TEST_LIST_SORTED_3, tester.toString());
     }
 
     private static void initTestFile(TextFile tester) {
