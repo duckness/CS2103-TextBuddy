@@ -38,6 +38,7 @@ public class TextFileTest {
 
     private static final String TEST_SEARCH_1 = null;
     private static final String TEST_SEARCH_2 = "3. " + TEST_STRING_3;
+    private static final String TEST_SEARCH_3 = "2. " + TEST_STRING_2;
 
     @Test
     public void testToString() {
@@ -105,6 +106,9 @@ public class TextFileTest {
 
         assertEquals("Full line must be found", TEST_SEARCH_2,
                      tester.search(TEST_STRING_3));
+
+        assertEquals("Substring of a line must be found", TEST_SEARCH_3,
+                     tester.search(TEST_STRING_2.substring(5, 10)));
     }
 
     private static void initTestFile(TextFile tester) {
