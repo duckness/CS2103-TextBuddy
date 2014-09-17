@@ -11,32 +11,33 @@ public class TextFileTest {
 
     private static final String TEST_STRING_1 = "The quick brown fox";
     private static final String TEST_STRING_2 = "jumps over the lazy dog";
-    private static final String TEST_STRIMG_3 = "Lorem ipsum";
+    private static final String TEST_STRING_3 = "Lorem ipsum";
     private static final String TEST_STRING_4 = "asdfghjkl";
     private static final String TEST_STRING_5 = "shesellsseashellsbytheseashore";
 
     private static final String TEST_LIST_EMPTY = "\"" + TEST_FILE + "\" is empty.%n";
     private static final String TEST_LIST_INIT = "1. " + TEST_STRING_1 + "%n" +
                                                  "2. " + TEST_STRING_2 + "%n" +
-                                                 "3. " + TEST_STRIMG_3 + "%n" +
+                                                 "3. " + TEST_STRING_3 + "%n" +
                                                  "4. " + TEST_STRING_4 + "%n";
     private static final String TEST_LIST_SORTED_1 = "1. " + TEST_STRING_4 + "%n" +
                                                      "2. " + TEST_STRING_2 + "%n" +
-                                                     "3. " + TEST_STRIMG_3 + "%n" +
+                                                     "3. " + TEST_STRING_3 + "%n" +
                                                      "4. " + TEST_STRING_1 + "%n";
     private static final String TEST_LIST_SORTED_2 = "1. " + TEST_STRING_4 + "%n" +
                                                      "2. " + TEST_STRING_2 + "%n" +
                                                      "3. " + TEST_STRING_2 + "%n" +
-                                                     "4. " + TEST_STRIMG_3 + "%n" +
+                                                     "4. " + TEST_STRING_3 + "%n" +
                                                      "5. " + TEST_STRING_1 + "%n";
     private static final String TEST_LIST_SORTED_3 = "1. " + TEST_STRING_4 + "%n" +
                                                      "2. " + TEST_STRING_2 + "%n" +
                                                      "3. " + TEST_STRING_2 + "%n" +
-                                                     "4. " + TEST_STRIMG_3 + "%n" +
+                                                     "4. " + TEST_STRING_3 + "%n" +
                                                      "5. " + TEST_STRING_5 + "%n" +
                                                      "6. " + TEST_STRING_1 + "%n";
 
     private static final String TEST_SEARCH_1 = null;
+    private static final String TEST_SEARCH_2 = "3. " + TEST_STRING_3;
 
     @Test
     public void testToString() {
@@ -99,8 +100,11 @@ public class TextFileTest {
         TextFile tester = new TextFile(TEST_PATH);
         initTestFile(tester);
 
-        assertEquals("Null must be return for a string that is not found",
+        assertEquals("Null must be returned for a string that is not found",
                      TEST_SEARCH_1, tester.search(TEST_STRING_5));
+
+        assertEquals("Full line must be found", TEST_SEARCH_2,
+                     tester.search(TEST_STRING_3));
     }
 
     private static void initTestFile(TextFile tester) {
@@ -111,7 +115,7 @@ public class TextFileTest {
     private static void populateTestFile(TextFile tester) {
         tester.add(TEST_STRING_1);
         tester.add(TEST_STRING_2);
-        tester.add(TEST_STRIMG_3);
+        tester.add(TEST_STRING_3);
         tester.add(TEST_STRING_4);
     }
 
