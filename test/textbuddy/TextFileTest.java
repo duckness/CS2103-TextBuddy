@@ -15,6 +15,8 @@ public class TextFileTest {
     private static final String TEST_STRING_4 = "asdfghjkl";
     private static final String TEST_STRING_5 = "shesellsseashellsbytheseashore";
 
+    private static final String TEST_STRING_5_SUB = "sea";
+
     private static final String TEST_LIST_EMPTY = "\"" + TEST_FILE + "\" is empty.%n";
     private static final String TEST_LIST_INIT = "1. " + TEST_STRING_1 + "%n" +
                                                  "2. " + TEST_STRING_2 + "%n" +
@@ -41,6 +43,7 @@ public class TextFileTest {
     private static final String TEST_SEARCH_3 = "2. " + TEST_STRING_2 + "%n";
     private static final String TEST_SEARCH_4 = "1. " + TEST_STRING_1 + "%n" +
                                                 "5. " + TEST_STRING_1 + "%n";
+    private static final String TEST_SEARCH_5 = "6. " + TEST_STRING_5 + "%n";
 
     @Test
     public void testToString() {
@@ -115,6 +118,10 @@ public class TextFileTest {
         tester.add(TEST_STRING_1);
         assertEquals("Multiple lines must be returned if string is found in multiple lines",
                      TEST_SEARCH_4, tester.search(TEST_STRING_1.substring(7)));
+
+        tester.add(TEST_STRING_5);
+        assertEquals("The same line must not be returned more than once",
+                     TEST_SEARCH_5, tester.search(TEST_STRING_5_SUB));
     }
 
     private static void initTestFile(TextFile tester) {
