@@ -39,6 +39,8 @@ public class TextFileTest {
     private static final String TEST_SEARCH_1 = null;
     private static final String TEST_SEARCH_2 = "3. " + TEST_STRING_3 + "%n";
     private static final String TEST_SEARCH_3 = "2. " + TEST_STRING_2 + "%n";
+    private static final String TEST_SEARCH_4 = "1. " + TEST_STRING_1 + "%n" +
+                                                "5. " + TEST_STRING_1 + "%n";
 
     @Test
     public void testToString() {
@@ -109,6 +111,10 @@ public class TextFileTest {
 
         assertEquals("Substring of a line must be found", TEST_SEARCH_3,
                      tester.search(TEST_STRING_2.substring(5, 10)));
+
+        tester.add(TEST_STRING_1);
+        assertEquals("Multiple lines must be returned if string is found in multiple lines",
+                     TEST_SEARCH_4, tester.search(TEST_STRING_1.substring(7)));
     }
 
     private static void initTestFile(TextFile tester) {
