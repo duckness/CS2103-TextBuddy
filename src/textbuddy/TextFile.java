@@ -101,12 +101,20 @@ class TextFile {
     }
 
     public String search(String searchString) {
+
+        String searchResults = "";
+
         for (int i = 0; i < lines_.size(); i++) {
             if (lines_.get(i).contains(searchString)){
-                return (i + 1) + ". " + lines_.get(i) + "%n";
+                searchResults += (i + 1) + ". " + lines_.get(i) + "%n";
             }
         }
-        return null;
+
+        if (searchResults.equals("")) {
+            return null;
+        } else {
+            return searchResults;
+        }
     }
 
     // Mutators //
