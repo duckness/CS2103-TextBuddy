@@ -100,6 +100,10 @@ class TextFile {
         return lastDeleted_;
     }
 
+    public String search(String searchString) {
+        return null;
+    }
+
     // Mutators //
 
     /**
