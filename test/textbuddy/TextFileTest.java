@@ -37,8 +37,8 @@ public class TextFileTest {
                                                      "6. " + TEST_STRING_1 + "%n";
 
     private static final String TEST_SEARCH_1 = null;
-    private static final String TEST_SEARCH_2 = "3. " + TEST_STRING_3;
-    private static final String TEST_SEARCH_3 = "2. " + TEST_STRING_2;
+    private static final String TEST_SEARCH_2 = "3. " + TEST_STRING_3 + "%n";
+    private static final String TEST_SEARCH_3 = "2. " + TEST_STRING_2 + "%n";
 
     @Test
     public void testToString() {
