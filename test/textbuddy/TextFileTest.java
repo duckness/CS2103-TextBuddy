@@ -38,7 +38,7 @@ public class TextFileTest {
                                                      "5. " + TEST_STRING_5 + "%n" +
                                                      "6. " + TEST_STRING_1 + "%n";
 
-    private static final String TEST_SEARCH_1 = null;
+    private static final String TEST_SEARCH_1 = "Not found.";
     private static final String TEST_SEARCH_2 = "3. " + TEST_STRING_3 + "%n";
     private static final String TEST_SEARCH_3 = "2. " + TEST_STRING_2 + "%n";
     private static final String TEST_SEARCH_4 = "1. " + TEST_STRING_1 + "%n" +
@@ -106,7 +106,7 @@ public class TextFileTest {
         TextFile tester = new TextFile(TEST_PATH);
         initTestFile(tester);
 
-        assertEquals("Null must be returned for a string that is not found",
+        assertEquals("\"Not found\" must be returned for a string that is not found",
                      TEST_SEARCH_1, tester.search(TEST_STRING_5));
 
         assertEquals("Full line must be found", TEST_SEARCH_2,
