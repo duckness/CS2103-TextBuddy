@@ -111,7 +111,7 @@ class TextFile {
         }
 
         if (searchResults.equals("")) {
-            return null;
+            return "Not found.";
         } else {
             return searchResults;
         }
