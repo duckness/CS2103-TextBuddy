@@ -17,9 +17,9 @@ import java.util.Scanner;
 /**
  * TextBuddy is a program which manipulates text in a file. The file to be edited
  * is specified in the command line parameters, and will be created if asked for.
- * Adding, deleting, clearing, and displaying possible. New entries will be added
- * to the end of the file, which will be saved whenever an input changes the
- * contents of the file.
+ * Adding, deleting, clearing, searching, sorting, and displaying are possible.
+ * New entries will be added to the end of the file, which will be saved whenever
+ * an input changes the contents of the file.
  *
  * Example command format:
  *     c:>java TextBuddy mytextfile.txt
@@ -65,7 +65,7 @@ public class TextBuddy {
 
     // Possible user command types for the main program
     enum UserCommand {
-        DISPLAY, ADD, DELETE, CLEAR, EXIT
+        DISPLAY, ADD, DELETE, CLEAR, SORT, SEARCH, EXIT
     }
 
     // Possible user command types for Y/N questions
@@ -126,6 +126,14 @@ public class TextBuddy {
 
                 case CLEAR :
                     commandClear();
+                    break;
+
+                case SORT :
+                    commandSort();
+                    break;
+
+                case SEARCH :
+                    commandSearch();
                     break;
 
                 case EXIT :
@@ -229,6 +237,16 @@ public class TextBuddy {
 
     private static void commandDisplay() {
         printMessage(inputFile_.toString());
+    }
+
+    private static void commandSearch() {
+        printMessage(inputFile_.search(readPhrase()));
+    }
+
+    private static void commandSort() {
+        inputFile_.sort();
+        commandDisplay();
+        inputFile_.save();
     }
 
     /**
