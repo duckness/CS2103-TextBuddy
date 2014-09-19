@@ -90,7 +90,7 @@ public class TextBuddy {
      * @param args Is the user's input
      * @return Returns a txtFile if the user input is valid
      */
-    public static TextFile processInput(String[] args) {
+    private static TextFile processInput(String[] args) {
         checkForMissingArg(args);
         checkForMissingFile(args);
         return new TextFile(args[0]);
@@ -107,7 +107,7 @@ public class TextBuddy {
         System.out.print(String.format(str, args));
     }
 
-    public static void processCommands() {
+    private static void processCommands() {
         while (true) {
             printMessage(PRINT_COMMAND);
             switch (UserCommand.valueOf(readWord())) {
