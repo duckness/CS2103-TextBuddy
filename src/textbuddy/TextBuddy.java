@@ -1,12 +1,3 @@
-/**
- * =====NOTES==============
- * CS2103T (AY2014/15 Sem1)
- * CE1 - TextBuddy
- * A0116538A
- * Tutorial ID: T09
- * ====/NOTES==============
- */
-
 package textbuddy;
 
 import java.io.File;
